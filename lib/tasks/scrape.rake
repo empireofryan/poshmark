@@ -62,9 +62,12 @@ end
     b.goto 'https://poshmark.com/search?query=calvin+klein+boots&department=Women&ac=true'
 
     doc = Nokogiri::HTML(b.html)
-    puts doc
+    # puts doc
     a = doc.css('.tile')
     b = doc.css('.postArticle-content a')
+    puts a.first
+  
+    binding.pry
     c = a.count.to_i
     c = c - 1
     z = (0..c).to_a
