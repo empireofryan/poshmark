@@ -1,0 +1,65 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<div class="container">
+  <h1>SEARCH PAGE</h1>
+  <% @items.map do |i| %>
+    Title: <%= i.title %><br>
+    <%#= i.created_at.strftime('%m %d %Y %H %M %a') %>
+    <%#= i.updated_at.strftime('%M %d %Y') %>
+    Brand: <%= i.brand %><br>
+    $<%= i.price %><br>
+    Size: <%= i.size %><br>
+    <br><br>
+  <% end %>
+
+
+  <% sum = 0 %>
+  <% index = 0 %>
+  <% @items.each_with_index do |a, i| %>
+    <% a = a.price %>
+    <% sum += a %>
+  <% end %>
+  <br><br>
+  <div class="row">
+    <div class="col-md-4">
+      <h1>Average Price:</h1>
+      <h2><%= number_to_currency(sum /@items.all.length) %></h2>
+    </div>
+    <!-- Median Price:<br> -->
+    <!-- <%#= @items.median(:price) %><br>
+    <br> -->
+    <div class="col-md-3">
+      <h1>Min:</h1>
+      <h2>$<%= @items.minimum(:price) %></h2>
+    </div>
+    <div class="col-md-3">
+    <h1>Max:</h1>
+    <h2>$<%= @items.maximum(:price) %></h2>
+    </div>
+  </div>
+  <br><br>
+<h2>Between $10 - $40</h2><br>
+  <% @items.all.map do |i| %>
+    <% if i.price > 10 && i.price < 41 %>
+      <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+    <% end %>
+  <% end %><br><br>
+  <h2>Between $41 - $70</h2><br>
+  <% @items.all.map do |i| %>
+    <% if i.price > 40 && i.price < 71 %>
+      <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+    <% end %>
+  <% end %><br><br>
+  <h2>Between $71 - $100</h2><br>
+  <% @items.all.map do |i| %>
+    <% if i.price > 70 && i.price < 101 %>
+      <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+    <% end %>
+  <% end %><br><br>
+  <h2>Over $100</h2><br>
+  <% @items.all.map do |i| %>
+    <% if i.price > 100 %>
+      <span style="font-size:20px; padding:5px;"><%= i.price %><span>
+    <% end %>
+  <% end %>
+</div>

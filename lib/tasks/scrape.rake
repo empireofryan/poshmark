@@ -42,18 +42,7 @@ namespace :scrape do
 
   t1 = Time.now
   puts 'time begun ' + t1.to_s
-
-   #movies   #run movies scraper
    poshmark   #run medium scraper
-  # awwwards #run awwwards scraper
-  # deals_pt1
-  #  economists
-  #  posh
-  #   twitter
-  #   next_web
-  #   google
-  #   nytimes
-  # imgur
   puts 'Scraper successfully executed.'
 end
 
@@ -62,26 +51,43 @@ end
     b.goto 'https://poshmark.com/search?query=calvin+klein+boots&department=Women&ac=true'
 
     doc = Nokogiri::HTML(b.html)
-    # puts doc
     a = doc.css('.tile')
-    b = doc.css('.postArticle-content a')
-    puts a.first
-  
-    binding.pry
     c = a.count.to_i
     c = c - 1
     z = (0..c).to_a
     puts z
-    binding.pry
      z.each do |i|
-       link = b[i]['href']
-       puts link
-       url = link
-       title = a[i.to_i].text
+      #  a = doc.css('.tile')
+       brand = doc.css('.tile')[i]["data-post-brand"]
+       price = a[i]['data-post-price']
+       price[0] = ''
+       puts price
+       size = a[i]['data-post-size']
+       b = doc.css('.covershot-con')
+       href = b[i]['href']
+       title = b[i]['title']
+       img = doc.at_css('.covershot-con img').attr('src')
+      #  img = doc.css('.covershot-con')[i]('img')
+    #  imgalt = b[i]('img')['alt']
+      #  originalprice = doc.css[i]('.original')
+       @item = Item.find_or_create_by(title: title, brand: brand, url: href, price: price, size: size)
+       puts 'title:'
        puts title
-       @medium = Medium.find_or_create_by(title: title, url: url)
-       @medium.save
-       puts 'Medium article created!'
+       puts 'brand:'
+       puts brand
+       puts 'url:'
+       puts href
+       puts 'image'
+       puts img
+       puts 'price:'
+       puts price
+       puts 'size:'
+       puts size
+      #  puts 'originalprice'
+      #  puts originalprice
+        # Item.find_or_create_by(title: title, url: href, brand: brand, price: price, size: size, originalprice: originalprice)
+       @item.save!
+       puts 'Item created!'
        puts " "
      end
   end # end of medium

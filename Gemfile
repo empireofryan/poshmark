@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'active_median'
 gem 'fusioncharts-rails'
 gem 'rails_real_favicon'
 gem 'capybara'
