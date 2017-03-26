@@ -5,11 +5,13 @@
     <div class="col-sm-2 navbutton">Home</div>
       <a href="#"<div class="col-sm-1 col-sm-offset-9 navbutton" id="login"><b>Log In </b></div></a>
   </div>
-<br><br><br>
+<br>
+<div class="landingbox">
   <h1 id="searchtitle">SPECTACLE</h1><br>
   <%= image_tag("glasses.png", width: "20%", style: "display:block; margin:auto;") %><br>
   <input id="searchinput"></input><br>
   <button id="searchbutton">Submit</button>
+</div>
   <%#= form_for @item do |f| %>
     <%#= f.label :title %>
     <%#= f.text_field :title %><br />
@@ -47,26 +49,38 @@
     <% sum += a %>
   <% end %>
   <br><br>
+  <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <h1>Average Price:</h1>
-      <h2><%= number_to_currency(sum /@items.all.length) %></h2>
+      <h2><%#= number_to_currency(sum /@items.all.length) %></h2>
+    </div> -->
+    <div class="col-sm-6 text-center" style="">
+      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Average Price</div>
+      <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;"><%= number_to_currency(sum /@items.all.length) %></div>
     </div>
     <!-- Median Price:<br> -->
     <!-- <%#= @items.median(:price) %><br>
     <br> -->
-    <div class="col-md-3">
-      <h1>Min:</h1>
-      <h2>$<%= @items.minimum(:price) %></h2>
+    <div class="col-sm-3 text-center" style="">
+      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
+      <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @items.minimum(:price).to_i %></div>
+    </div>
+    <div class="col-sm-3 text-center" style="">
+      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
+      <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @items.maximum(:price).to_i %></div>
+    </div>
+      <!-- <span style="font-size:40px; background:gray; padding:10px;">Min</span>
+      <span style="background:black; color:white; font-size:40px; padding:10px;">$<%= @items.minimum(:price) %></span>
     </div>
     <div class="col-md-3">
-    <h1>Max:</h1>
-    <h2>$<%= @items.maximum(:price) %></h2>
-    </div>
+    <span style="font-size:40px; background:gray; padding:10px">Max</span>
+    <span style="background:black; color:white; font-size:40px; padding:10px;">$<%= @items.maximum(:price) %></span>
+    </div> -->
   </div>
   <br><br>
 <h2>Between $10 - $40</h2><br>
-  <% @items.all.map do |i| %>
+  <% @items.all.sort_by{|e| e[:price]}.map do |i| %>
     <% if i.price > 10 && i.price < 41 %>
       <span style="font-size:20px; padding:5px;"><%= i.price %></span>
       <span  style=""><img src="<%= i.image %>" id="tileimage" class="imgbetween" style=""></span>
@@ -91,10 +105,10 @@
     <% end %>
   <% end %>
 </div>
-
+</div>
 <style>
 body {
-  background: #99ff99;
+  background: #99FFFF;
 }
 #tileimage {
   width:100px;
@@ -158,5 +172,11 @@ body {
 }
 .landingnav {
   padding-top:10px;
+}
+.landingbox {
+  background: #99ff99;
+  margin:auto;
+  border-top: 2px solid #FF9999;
+  padding:100px;
 }
 </style>

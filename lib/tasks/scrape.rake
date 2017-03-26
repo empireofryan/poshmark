@@ -16,29 +16,25 @@ namespace :scrape do
   client.timeout = TIMEOUT # seconds – default is 60
   #browser = Watir::Browser.new :firefox, :http_client => client
 
-  puts '!WWWWWeeu..   ..ueeWWWWW! '
-  puts ' "$$(    R$$e$$R    )$$" '
-  puts '  "$8oeeo. "*" .oeeo8$" '
-  puts '  .$$#"""*$i i$*"""#$$. '
-  puts '  9$" @@@ $$ $$F @@@ $N '
-  puts '   9$  `` $$ $$L `` $$ '
-  puts '  `$$uuuuo$$ $$uuuuu$$" '
-  puts '  x$P**$$P*$"$P#$$$*R$L '
-  puts "  x$$   $$k $$F :$P` '$$i "
-  puts ' $$     #$  #  $$     #$k '
-  puts 'd$"     "$L   x$F     "$$ '
-  puts "$$      '$E   9$>      9$>"
-  puts "$6       $F   ?$>      9$>"
-  puts "$$      d$    '$&      8$"
-  puts '"$k    x$$     !$k    :$$'
-  puts ' #$b  u$$L      9$b.  $$"'
-  puts ' "#$od$#$$u....u$P$Nu@$"'
-  puts '  ..?$R)..?R$$$$*"  #$P'
-  puts ' $$$$$$$$$$$$$$@WWWW$NWWW'
-  puts ' `````""3$F""""#$F"""""""'
-  puts "        @$.... '$B"
-  puts '       d$$$$$$$$$$:'
-  puts '       ````````````'
+puts '             ._      _.'
+puts '            /  `""""`  \ '
+puts '      .-""`"-..____..-""`""-.'
+puts '     /`\                    /`\ '
+puts '    /`   |                  |   `\ '
+puts '   /`    |    SPECTACLE    |    `\ '
+puts '  /      |                  |      \ '
+puts " /       /     POSHMARK     \       \ "
+puts '/        |                  |        \ '
+puts "'-._____.|    EXTENSION     |._____.-'"
+puts '         |                  |'
+puts '         |                  |'
+puts '         |                  |'
+puts '         \                  |'
+puts '         /                  |'
+puts '         |                  \ '
+puts '         |                  |'
+puts "         '._              _.'"
+puts '            `""--------""`'
 
   t1 = Time.now
   puts 'time begun ' + t1.to_s
