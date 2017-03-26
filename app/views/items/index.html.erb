@@ -1,18 +1,40 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <div class="container">
-  <h1>SEARCH PAGE</h1>
+  <div class="landingnav row">
+    <div class="col-sm-2 navbutton">Home</div>
+      <a href="#"<div class="col-sm-1 col-sm-offset-9 navbutton" id="login"><b>Log In </b></div></a>
+  </div>
+<br><br><br>
+  <h1 id="searchtitle">SPECTACLE</h1><br>
+  <%= image_tag("glasses.png", width: "20%", style: "display:block; margin:auto;") %><br>
+  <input id="searchinput"></input><br>
+  <button id="searchbutton">Submit</button>
+  <%#= form_for @item do |f| %>
+    <%#= f.label :title %>
+    <%#= f.text_field :title %><br />
+
+    <%#= f.label :brand %>
+    <%#= f.text_field :brand %><br />
+
+    <%#= f.submit %>
+  <%# end %>
+    <%# form_for omg_items_path do %>
+        <%#= puts 'hello' %>
+        <%#= text_field_tag :my_input %>
+        <%#= submit_tag "Send input" %>
+    <%# end %>
   <% @items.map do |i| %>
   <% unless i.title.include?('jeans') || i.title.include?('Jeans') || i.title.include?('JEANS') ||  i.title.include?('Jean') ||  i.title.include?('pants') ||  i.title.include?('Pants') ||  i.title.include?('PANTS') %>
   <% if i.title.include?('oot') %>
-    Title: <%= i.title %><br>
+    <!-- Title: <% i.title %>
     <%#= i.created_at.strftime('%m %d %Y %H %M %a') %>
     <%#= i.updated_at.strftime('%M %d %Y') %>
-    Brand: <%= i.brand %><br>
-    $<%= i.price %><br>
-    Size: <%= i.size %><br>
-    <img src="<%= i.image %>">
-    <br><br>
+    Brand: <% i.brand %>
+    $<% i.price %>
+    Size: <% i.size %>
+    <img src="<% i.image %>" style="width:50px;"> -->
+
     <% end %>
     <%end%>
   <% end %>
@@ -47,7 +69,7 @@
   <% @items.all.map do |i| %>
     <% if i.price > 10 && i.price < 41 %>
       <span style="font-size:20px; padding:5px;"><%= i.price %></span>
-      <span style="width:100px"><img src="<%= i.image %>"></span>
+      <span  style=""><img src="<%= i.image %>" id="tileimage" class="imgbetween" style=""></span>
     <% end %>
   <% end %><br><br>
   <h2>Between $41 - $70</h2><br>
@@ -69,3 +91,72 @@
     <% end %>
   <% end %>
 </div>
+
+<style>
+body {
+  background: #99ff99;
+}
+#tileimage {
+  width:100px;
+}
+#tileimage:hover {
+  width:200px;
+  transition:.5s;
+}
+#searchinput {
+  text-align:center;
+  display:block;
+  margin:auto;
+  border-radius:45px;
+  width:500px;
+  height:40px;
+  background:orange;
+}
+#searchbutton {
+  text-align:center;
+  display:block;
+  margin:auto;
+  background: #FF3F3F;
+  color:white;
+  border-radius: 45px;
+  width:80px;
+}
+#searchbutton:hover {
+  text-align:center;
+  display:block;
+  margin:auto;
+  background: #FF6B6B;
+  color:white;
+  border-radius: 45px;
+  width:80px;
+}
+#searchtitle {
+  text-align:center;
+  font-size:120px;
+  color: #04fbfb;
+  text-shadow: 2px 2px black;
+}
+.imgbetween {
+  width:100px;
+  border:3px solid black;
+}
+.navbutton {
+  padding:10px 20px;
+  color:white;
+}
+#login {
+  border:2px solid white;
+  border-radius: 45px;
+  text-align:center;
+  transition: .5s;
+}
+#login:hover {
+  background: white;
+  color:black;
+  transition: .5s;
+  text-decoration: none;
+}
+.landingnav {
+  padding-top:10px;
+}
+</style>

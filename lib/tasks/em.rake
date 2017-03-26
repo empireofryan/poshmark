@@ -14,6 +14,9 @@ namespace :em do
 
           # fire async requests, on completion advance the iterator
           http = EventMachine::HttpRequest.new(url).aget :query => {'keyname' => 'value'}
+          # http.callback do
+          #   puts JSON.parse(http.response)
+          # end
           http.callback { iter.return(http) }
           http.errback { iter.return(http) }
       end
