@@ -48,7 +48,7 @@ end
 
   def poshmark
     b = Watir::Browser.new(:phantomjs)
-    b.goto 'https://poshmark.com/search?query=calvin+klein+boots&department=Women&ac=true'
+    b.goto 'https://poshmark.com/search?availability=sold_out&category=Shoes&department=Women&max_id=5&query=calvin+klein+boots'
 
     doc = Nokogiri::HTML(b.html)
     a = doc.css('.tile')
@@ -66,11 +66,13 @@ end
        b = doc.css('.covershot-con')
        href = b[i]['href']
        title = b[i]['title']
-       img = doc.at_css('.covershot-con img').attr('src')
-      #  img = doc.css('.covershot-con')[i]('img')
-    #  imgalt = b[i]('img')['alt']
-      #  originalprice = doc.css[i]('.original')
-       @item = Item.find_or_create_by(title: title, brand: brand, url: href, price: price, size: size)
+      #  img = b[i]('img').attr('src')
+      #  c = doc.at_css('.covershot')
+       img = doc.css('.covershot')[i].attr('src')
+      # img = doc.css('.covershot-con')[i]('img')
+      # imgalt = b[i]('img')['alt']
+      # originalprice = doc.css[i]('.original')
+       @item = Item.find_or_create_by(title: title, brand: brand, url: href, price: price, image: img, size: size)
        puts 'title:'
        puts title
        puts 'brand:'

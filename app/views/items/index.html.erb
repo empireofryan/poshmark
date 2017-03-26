@@ -3,13 +3,18 @@
 <div class="container">
   <h1>SEARCH PAGE</h1>
   <% @items.map do |i| %>
+  <% unless i.title.include?('jeans') || i.title.include?('Jeans') || i.title.include?('JEANS') ||  i.title.include?('Jean') ||  i.title.include?('pants') ||  i.title.include?('Pants') ||  i.title.include?('PANTS') %>
+  <% if i.title.include?('oot') %>
     Title: <%= i.title %><br>
     <%#= i.created_at.strftime('%m %d %Y %H %M %a') %>
     <%#= i.updated_at.strftime('%M %d %Y') %>
     Brand: <%= i.brand %><br>
     $<%= i.price %><br>
     Size: <%= i.size %><br>
+    <img src="<%= i.image %>">
     <br><br>
+    <% end %>
+    <%end%>
   <% end %>
 
 
@@ -42,6 +47,7 @@
   <% @items.all.map do |i| %>
     <% if i.price > 10 && i.price < 41 %>
       <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+      <span style="width:100px"><img src="<%= i.image %>"></span>
     <% end %>
   <% end %><br><br>
   <h2>Between $41 - $70</h2><br>
