@@ -86,25 +86,28 @@
   <% @items.all.sort_by{|e| e[:price]}.map do |i| %>
     <% if i.price > 10 && i.price < 41 %>
       <span style="font-size:20px; padding:5px;"><%= i.price %></span>
-      <span  style=""><img src="<%= i.image %>" id="tileimage" class="imgbetween" style=""></span>
+      <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
     <% end %>
   <% end %><br><br>
   <h2>Between $41 - $70</h2><br>
-  <% @items.all.map do |i| %>
+  <% @items.all.sort_by{|e| e[:price]}.map do |i| %>
     <% if i.price > 40 && i.price < 71 %>
       <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+      <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
     <% end %>
   <% end %><br><br>
   <h2>Between $71 - $100</h2><br>
-  <% @items.all.map do |i| %>
+  <% @items.all.sort_by{|e| e[:price]}.map do |i| %>
     <% if i.price > 70 && i.price < 101 %>
       <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+      <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
     <% end %>
   <% end %><br><br>
   <h2>Over $100</h2><br>
-  <% @items.all.map do |i| %>
+  <% @items.all.sort_by{|e| e[:price]}.map do |i| %>
     <% if i.price > 100 %>
       <span style="font-size:20px; padding:5px;"><%= i.price %><span>
+      <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
     <% end %>
   <% end %>
 </div>
