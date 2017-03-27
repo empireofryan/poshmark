@@ -11,10 +11,11 @@
 <br>
 <div class="landingbox">
   <h1 id="searchtitle">SPECTACLE</h1><br>
+
   <%= image_tag("forposh.png", width: "20%", style: "position:absolute; left:73%; margin-top:-60px; width:150px") %><br>
   <%= image_tag("glasses.png", width: "150px", style: "display:block; margin:auto;") %><br>
   <input id="searchinput"></input><br>
-  <button id="searchbutton">Submit</button>
+  <button id="searchbutton" onclick="move()">Submit</button>
   <div id="container" style="display:block; margin:auto; margin-top:40px; margin-bottom:-30px;"></div>
 </div>
   <%#= form_for @item do |f| %>
@@ -211,7 +212,7 @@ body {
 <script>
 // progressbar.js@1.0.0 version is used
 // Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
-
+function move() {
 var bar = new ProgressBar.Line(container, {
   strokeWidth: 4,
   easing: 'easeInOut',
@@ -242,4 +243,5 @@ var bar = new ProgressBar.Line(container, {
 });
 
 bar.animate(1.0);  // Number from 0.0 to 1.0
+}
 </script>

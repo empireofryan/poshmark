@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325000239) do
+ActiveRecord::Schema.define(version: 20170327025149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(version: 20170325000239) do
   end
 
   create_table "median_functions", force: :cascade do |t|
+  end
+
+  create_table "queries", force: :cascade do |t|
+    t.string   "search"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
