@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+gem 'typhoeus'
+gem 'hydra'
+gem 'test-unit'
 gem 'active_median'
 gem 'fusioncharts-rails'
 gem 'rails_real_favicon'
