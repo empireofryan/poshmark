@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root to: 'items#index'
   resources :items
   resources :queries
+  get 'search/:query', to: 'queries#show'
 end

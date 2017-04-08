@@ -1,7 +1,7 @@
 namespace :hydra do
   task :run => [ :environment ] do
     hydra = Typhoeus::Hydra.new :max_concurrency => 5
-    urls = %w(http://www.nytimes.com http://www.cnn.com)
+    urls = %w(https://poshmark.com/search?availability=sold_out&category=Shoes&department=Women&max_id=5&query="" )
     responses = []
 
     urls.each do |url|
