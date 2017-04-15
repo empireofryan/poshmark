@@ -11,7 +11,7 @@ class QueriesController < ApplicationController
     new_query = params.require(:query).permit(:id, :search)
     query = Query.create(new_query)
     @query = params[:query][:search].gsub(" ", "%20")
-
+    @query_id = params[:query][:id]
   #  @search = @query.search
     # %x[rake hydra:run search="#{@search}"]
     hydra = Typhoeus::Hydra.new :max_concurrency => 5
@@ -77,7 +77,7 @@ class QueriesController < ApplicationController
              puts @query
             #  puts 'originalprice'
             #  puts originalprice
-             @item = Item.find_or_create_by(title: title, url: href, brand: brand, price: price, size: size, query: @query)
+             @item = Item.find_or_create_by(title: title, url: href, brand: brand, price: price, size: size, image: img)
              @item.save!
              puts 'Item created!'
              puts " "

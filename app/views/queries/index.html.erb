@@ -1,3 +1,165 @@
 <% Item.where(query: Item.last.query).each do |q| %>
-<%= q.inspect %>
+  <%= q.inspect %>
 <% end %>
+<% @item_query = Item.where(query: Item.last.query) %>
+<% sum = 0 %>
+<% index = 0 %>
+<% Item.where(query: Item.last.query).each_with_index do |a, i| %>
+  <% a = a.price %>
+  <% sum += a %>
+<% end %>
+<br><br>
+<div class="container">
+<div class="row">
+  <!-- <div class="col-md-4">
+    <h1>Average Price:</h1>
+    <h2><%#= number_to_currency(sum /@item_query.all.length) %></h2>
+  </div> -->
+  <div class="col-sm-6 text-center" style="">
+    <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Average Price</div>
+    <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;"><%= number_to_currency(sum /@item_query.length) %></div>
+  </div>
+  <!-- Median Price:<br> -->
+  <!-- <%#= @item_query.median(:price) %><br>
+  <br> -->
+  <div class="col-sm-3 text-center" style="">
+    <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
+    <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.minimum(:price).to_i %></div>
+  </div>
+  <div class="col-sm-3 text-center" style="">
+    <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
+    <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.maximum(:price).to_i %></div>
+  </div>
+    <!-- <span style="font-size:40px; background:gray; padding:10px;">Min</span>
+    <span style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.minimum(:price) %></span>
+  </div>
+  <div class="col-md-3">
+  <span style="font-size:40px; background:gray; padding:10px">Max</span>
+  <span style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.maximum(:price) %></span>
+  </div> -->
+</div>
+<br><br>
+<h2>Between $10 - $40</h2><br>
+<% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
+  <% if i.price > 10 && i.price < 41 %>
+    <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+    <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
+  <% end %>
+<% end %><br><br>
+<h2>Between $41 - $70</h2><br>
+<% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
+  <% if i.price > 40 && i.price < 71 %>
+    <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+    <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
+  <% end %>
+<% end %><br><br>
+<h2>Between $71 - $100</h2><br>
+<% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
+  <% if i.price > 70 && i.price < 101 %>
+    <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+    <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
+  <% end %>
+<% end %><br><br>
+<h2>Over $100</h2><br>
+<% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
+  <% if i.price > 100 %>
+    <span style="font-size:20px; padding:5px;"><%= i.price %><span>
+    <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
+  <% end %>
+<% end %>
+</div>
+</div>
+<style>
+body {
+background: #99FFFF;
+}
+#tileimage {
+width:100px;
+}
+#tileimage:hover {
+width:200px;
+transition:.5s;
+}
+#searchinput {
+text-align:center;
+display:block;
+margin:auto;
+border-radius:45px;
+width:500px;
+height:40px;
+background:orange;
+color:white;
+font-size:20px;
+}
+#searchinput:focus {
+outline: none;
+}
+#searchbutton {
+text-align:center;
+display:block;
+margin:auto;
+background: #FF3F3F;
+color:white;
+border-radius: 45px;
+width:140px;
+padding:10px;
+font-size:22px;
+transition:.5s;
+}
+#searchbutton:hover {
+text-align:center;
+display:block;
+margin:auto;
+background: #FF6B6B;
+color:white;
+border-radius: 45px;
+width:140px;
+font-size:22px;
+transition:.5s;
+}
+#searchtitle {
+font-family: 'Limelight', cursive;
+text-align:center;
+font-size:120px;
+color: #04fbfb;
+color:black;
+color: #008282;
+text-shadow: 2px 2px black;
+}
+.imgbetween {
+width:100px;
+border:3px solid black;
+}
+.navbutton {
+padding:10px 20px;
+color:white;
+}
+#login {
+border:2px solid white;
+border-radius: 45px;
+text-align:center;
+transition: .5s;
+}
+#login:hover {
+background: white;
+color:black;
+transition: .5s;
+text-decoration: none;
+}
+.landingnav {
+padding-top:10px;
+}
+.landingbox {
+background: #99ff99;
+/*background: linear-gradient(#D2FFD2, #99ff99, #99ff99);*/
+margin:auto;
+border-top: 2px solid #FF9999;
+padding:100px;
+}
+#container {
+margin: 20px;
+width: 400px;
+height: 8px;
+position: relative;
+}
+</style>
