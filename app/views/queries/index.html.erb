@@ -1,0 +1,3 @@
+<% Item.where(query: Item.last.query).each do |q| %>
+<%= q.inspect %>
+<% end %>
