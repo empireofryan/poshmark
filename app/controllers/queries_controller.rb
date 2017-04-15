@@ -77,7 +77,7 @@ class QueriesController < ApplicationController
              puts @query
             #  puts 'originalprice'
             #  puts originalprice
-             @item = Item.find_or_create_by(title: title, url: href, brand: brand, price: price, size: size, image: img, query_id: Query.last.id)
+             @item = Item.find_or_create_by(title: title, url: href, brand: brand, price: price, size: size, image: img, query_id: @query_id)
              @item.save!
              puts 'Item created!'
              puts " "
