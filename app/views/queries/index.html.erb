@@ -1,10 +1,10 @@
-<% Item.where(query: Item.last.query).each do |q| %>
+<% Item.where(query_id: Item.last.query_id).each do |q| %>
   <%= q.inspect %>
 <% end %>
-<% @item_query = Item.where(query: Item.last.query) %>
+<% @item_query = Item.where(query_id: Item.last.query_id) %>
 <% sum = 0 %>
 <% index = 0 %>
-<% Item.where(query: Item.last.query).each_with_index do |a, i| %>
+<% Item.where(query_id: Item.last.query_id).each_with_index do |a, i| %>
   <% a = a.price %>
   <% sum += a %>
 <% end %>
