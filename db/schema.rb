@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415150759) do
+ActiveRecord::Schema.define(version: 20170415202429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170415150759) do
     t.string   "image"
     t.string   "query"
     t.integer  "query_id"
+    t.string   "search"
   end
 
   create_table "median_functions", force: :cascade do |t|

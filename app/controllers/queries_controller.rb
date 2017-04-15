@@ -8,8 +8,8 @@ class QueriesController < ApplicationController
   end
 
   def create
-    new_query = params.require(:query).permit(:id, :search)
-    query = Query.create(new_query)
+  #  new_query = params.require(:query).permit(:id, :search)
+  #  query = Query.create(new_query)
     @query = params[:query][:search].gsub(" ", "%20")
     @query_id = params[:query][:id]
   #  @search = @query.search
@@ -73,17 +73,26 @@ class QueriesController < ApplicationController
              puts price
              puts 'size:'
              puts size
-             puts 'query:'
+             puts 'search:'
              puts @query
+          #   byebug
             #  puts 'originalprice'
             #  puts originalprice
-             @item = Item.find_or_create_by(title: title, url: href, brand: brand, price: price, size: size, image: img, query_id: @query_id)
-             @item.save!
+        begin
+
+
+
+             @item = Item.find_or_create_by(title: title, url: href, brand: brand, price: price, size: size, image: img, search: @query, query_id: @query_id)
+          #   @item.save!
+        rescue ActiveRecord::RecordInvalid => invalid
+         puts invalid.record.errors
+         end
              puts 'Item created!'
              puts " "
            end
         else
           responses << "#{url} failed with #{resp.code}"
+          puts responses
           puts 'error ryan robinson!'
         end
       end
