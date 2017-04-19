@@ -1,4 +1,4 @@
-<% Item.where(query_id: Item.last.query_id).each do |q| %>
+<% Item.where(query_id: Query.last.id).each do |q| %>
   <%= q.inspect %>
 <% end %>
 <% @item_query = Item.where(query_id: Item.last.query_id) %>

@@ -8,14 +8,14 @@ class QueriesController < ApplicationController
   end
 
   def create
-  #  new_query = params.require(:query).permit(:id, :search)
-  #  query = Query.create(new_query)
+    new_query = params.require(:query).permit(:id, :search)
+    query = Query.create!(new_query)
     @query = params[:query][:search].gsub(" ", "%20")
     @query_id = params[:query][:id]
   #  @search = @query.search
     # %x[rake hydra:run search="#{@search}"]
     hydra = Typhoeus::Hydra.new :max_concurrency => 5
-    url = "https://poshmark.com/search?availability=sold_out&category=Shoes&department=Women&max_id=5&query=" + @query
+    url = "https://poshmark.com/search?availability=sold_out&department=Women&max_id=5&query=" + @query
     responses = []
 
   #  urls.each do |url|
@@ -82,7 +82,7 @@ class QueriesController < ApplicationController
 
 
 
-             @item = Item.find_or_create_by(title: title, url: href, brand: brand, price: price, size: size, image: img, search: @query, query_id: @query_id)
+             @item = Item.find_or_create_by(title: title, url: href, brand: brand, price: price, size: size, image: img, search: @query, query_id: Query.last.id)
           #   @item.save!
         rescue ActiveRecord::RecordInvalid => invalid
          puts invalid.record.errors
