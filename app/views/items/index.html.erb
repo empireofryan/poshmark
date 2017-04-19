@@ -14,8 +14,15 @@
 
   <%= image_tag("forposh.png", width: "20%", style: "position:absolute; left:73%; margin-top:-60px; width:150px") %><br>
   <%= image_tag("glasses.png", width: "150px", style: "display:block; margin:auto;") %><br>
-  <input id="searchinput"></input><br>
-  <button id="searchbutton" onclick="move()">Submit</button>
+  <%= form_for @query do |f| %>
+
+    <%= f.text_field :search %>
+    <%= f.submit "Search", class: "btn btn-default"%>
+
+  <% end %>
+
+  <!-- <input id="searchinput"></input><br>
+  <button id="searchbutton" onclick="move()">Submit</button> -->
   <div id="container" style="display:block; margin:auto; margin-top:40px; margin-bottom:-30px;"></div>
 </div>
   <%#= form_for @item do |f| %>
