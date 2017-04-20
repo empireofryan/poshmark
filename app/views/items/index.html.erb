@@ -16,8 +16,8 @@
   <%= image_tag("glasses.png", width: "150px", style: "display:block; margin:auto;") %><br>
   <%= form_for @query do |f| %>
 
-    <%= f.text_field :search %>
-    <%= f.submit "Search", class: "btn btn-default"%>
+    <%= f.text_field :search, id: "searchinput" %>
+    <%= f.submit "Search", class: "btn btn-default", id: "searchbutton", onclick: "move()" %>
 
   <% end %>
 

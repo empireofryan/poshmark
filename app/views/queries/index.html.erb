@@ -1,5 +1,7 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <% Item.where(query_id: Query.last.id).each do |q| %>
-  <%= q.inspect %>
+  <% q.inspect %>
 <% end %>
 <% @item_query = Item.where(query_id: Item.last.query_id) %>
 <% sum = 0 %>
@@ -15,21 +17,31 @@
     <h1>Average Price:</h1>
     <h2><%#= number_to_currency(sum /@item_query.all.length) %></h2>
   </div> -->
-  <div class="col-sm-6 text-center" style="">
-    <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Average Price</div>
-    <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;"><%= number_to_currency(sum /@item_query.length) %></div>
+  <div class="holder" style="padding:10px; background:white; height:400px;">
+    <div class="col-sm-12">
+      <p>The typical sale price for "<%=@item_query.last.search%>" is <%= number_to_currency((sum /@item_query.length) - @item_query.minimum(:price).to_i)%> to <%= number_to_currency((sum /@item_query.length) + @item_query.minimum(:price).to_i)%>.</p>
+    </div>
+    <div class="col-sm-6 text-center" style="">
+      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Average Price</div>
+      <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;"><%= @average_price = number_to_currency(sum /@item_query.length) %></div>
+    </div>
+    <div class="col-sm-3 text-center" style="">
+      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
+      <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.minimum(:price).to_i %></div>
+    </div>
+    <div class="col-sm-3 text-center" style="">
+      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
+      <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.maximum(:price).to_i %></div>
+    </div>
+    <div>
+      <p>Sell Fast: $9</p>
+      <p>Sell Slow: $15</p>
+    </div>
   </div>
   <!-- Median Price:<br> -->
   <!-- <%#= @item_query.median(:price) %><br>
   <br> -->
-  <div class="col-sm-3 text-center" style="">
-    <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
-    <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.minimum(:price).to_i %></div>
-  </div>
-  <div class="col-sm-3 text-center" style="">
-    <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
-    <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.maximum(:price).to_i %></div>
-  </div>
+
     <!-- <span style="font-size:40px; background:gray; padding:10px;">Min</span>
     <span style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.minimum(:price) %></span>
   </div>
