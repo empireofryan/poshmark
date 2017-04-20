@@ -33,7 +33,37 @@
       <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
       <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.maximum(:price).to_i %></div>
     </div>
+
+    <div class="row">
+    </div>
+    <br>
     <div>
+      <div style="height: 75px; width:800px; background: linear-gradient(to right, red, yellow, green); margin:auto; display:block; border:2px solid black;">
+      </div>
+      <div style="height: 50px; width:800px; margin:auto; display:block">
+        <span style="float:left;">3</span>
+        <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
+          <% i.spectrum(i.price) %>
+
+            <div class="tooltip1" style="position:relative; left:<%=i.spectrum(i.price) * 20 %>%; top: -67px; display:inline; font-size:40px; font-weight:100;">|</div>
+
+        <%end%>
+
+        <!-- <span style="display:in-line block; margin-left:48%;">12</span> -->
+        <span style="float:right;">
+          15
+        </span>
+      </div>
+        <div class="tooltip1">
+          <span class="tooltiptext">Tooltip text</span>
+        </div>
+      <div>
+        <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
+          <%= i.spectrum(i.price) %>
+        <%end%>
+        #auction price
+        #10.5/(min+max)
+      </div>
       <p>Sell Fast: $9</p>
       <p>Sell Slow: $15</p>
     </div>
@@ -173,5 +203,31 @@ margin: 20px;
 width: 400px;
 height: 8px;
 position: relative;
+}
+.tooltip1 {
+  /*position: relative;
+  display: inline-block;*/
+  /*border-bottom: 1px dotted black;*/
+}
+
+.tooltip1 .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip1:hover .tooltiptext {
+    visibility: visible;
 }
 </style>
