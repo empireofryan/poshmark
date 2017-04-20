@@ -22,6 +22,7 @@ gem 'whenever', :require => false #cron jobs
 gem 'rspec-retry'
 gem 'em-synchrony'
 gem 'em-http-request'
+gem "chartkick"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.0.1'

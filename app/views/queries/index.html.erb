@@ -45,27 +45,27 @@
         <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
           <% i.spectrum(i.price) %>
 
-            <div class="tooltip1" style="position:relative; left:<%=i.spectrum(i.price) * 20 %>%; top: -67px; display:inline; font-size:40px; font-weight:100;">|</div>
+            <div class="tooltip1" style="position:relative; left:<%=i.spectrum(i.price) * 20 %>%; top: -67px; margin-top:-20px; font-size:40px; font-weight:100;">|</div>
 
         <%end%>
-
+      </div>
         <!-- <span style="display:in-line block; margin-left:48%;">12</span> -->
         <span style="float:right;">
           15
         </span>
       </div>
+      <div class="col-sm-8" style="margin-top:0px;">
+        <%= line_chart @item_query.all.order(:price).group(:price).count %>
         <div class="tooltip1">
           <span class="tooltiptext">Tooltip text</span>
         </div>
       <div>
         <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
-          <%= i.spectrum(i.price) %>
+          <% i.spectrum(i.price) %>
         <%end%>
-        #auction price
-        #10.5/(min+max)
       </div>
-      <p>Sell Fast: $9</p>
-      <p>Sell Slow: $15</p>
+      <!-- <p>Sell Fast: $9</p>
+      <p>Sell Slow: $15</p> -->
     </div>
   </div>
   <!-- Median Price:<br> -->
