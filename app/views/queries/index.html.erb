@@ -1,4 +1,5 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Londrina+Outline|Quicksand" rel="stylesheet">
 
 <% Item.where(query_id: Query.last.id).each do |q| %>
   <% q.inspect %>
@@ -17,12 +18,12 @@
     <h1>Average Price:</h1>
     <h2><%#= number_to_currency(sum /@item_query.all.length) %></h2>
   </div> -->
-  <div class="holder" style="padding:10px; background:white; height:400px;">
+  <div class="holder" style="padding:10px; background:white; height:800px; background: #99FF99; border:1px solid black;">
     <div class="col-sm-12">
-      <p>The typical sale price for "<%=@item_query.last.search%>" is <%= number_to_currency((sum /@item_query.length) - @item_query.minimum(:price).to_i)%> to <%= number_to_currency((sum /@item_query.length) + @item_query.minimum(:price).to_i)%>.</p>
-    </div>
+      <h2 style="text-align:center; color: #A4C0FF; font-weight:600;">The typical sale price for &nbsp <span style="font-family: 'Londrina Outline', cursive; font-size:60px; font-weight:600"><%=@item_query.last.search%>&nbsp</span> is <%= number_to_currency((sum /@item_query.length) - @item_query.minimum(:price).to_i)%> to <%= number_to_currency((sum /@item_query.length) + @item_query.minimum(:price).to_i)%>.</h2><br>
+    </div><br><br>
     <div class="col-sm-6 text-center" style="">
-      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Average Price</div>
+      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Average</div>
       <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;"><%= @average_price = number_to_currency(sum /@item_query.length) %></div>
     </div>
     <div class="col-sm-3 text-center" style="">
@@ -30,7 +31,7 @@
       <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.minimum(:price).to_i %></div>
     </div>
     <div class="col-sm-3 text-center" style="">
-      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Min</div>
+      <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Max</div>
       <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.maximum(:price).to_i %></div>
     </div>
 
@@ -38,27 +39,14 @@
     </div>
     <br>
     <div>
-      <div style="height: 75px; width:800px; background: linear-gradient(to right, red, yellow, green); margin:auto; display:block; border:2px solid black;">
-      </div>
-      <div style="height: 50px; width:800px; margin:auto; display:block">
-        <span style="float:left;">3</span>
-        <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
-          <% i.spectrum(i.price) %>
+      <div style="height: 253px; width:800px; background: linear-gradient(to right, violet, violet, green, green, orange, orange, orange, red); margin:auto; display:block; border:2px solid black;">
 
-            <div class="tooltip1" style="position:relative; left:<%=i.spectrum(i.price) * 20 %>%; top: -67px; margin-top:-20px; font-size:40px; font-weight:100;">|</div>
 
-        <%end%>
+        <%= column_chart @item_query.all.order(:price).group(:price).count, label: "Sales", points: false, yaxis: false, refresh: 60, library: {yAxis: {gridlines: {color: "transparent"}}} %>
       </div>
-        <!-- <span style="display:in-line block; margin-left:48%;">12</span> -->
-        <span style="float:right;">
-          15
-        </span>
-      </div>
+
       <div class="col-sm-8" style="margin-top:0px;">
-        <%= line_chart @item_query.all.order(:price).group(:price).count %>
-        <div class="tooltip1">
-          <span class="tooltiptext">Tooltip text</span>
-        </div>
+        <%#= line_chart @item_query.all.order(:price).group(:price).count %>
       <div>
         <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
           <% i.spectrum(i.price) %>
@@ -67,51 +55,92 @@
       <!-- <p>Sell Fast: $9</p>
       <p>Sell Slow: $15</p> -->
     </div>
+  </div><br><br>
+  <div class="row" style="">
+    <div class="center1">
+    <div class="col-sm-2">
+      <h2>Key</h2>
+    </div>
+    <div class="col-sm-3 center" style="background:#EE82EE; width: 140px; height:140px; padding:22px; text-align:center; color:white; border-radius:70px; border:2px solid black; font-weight:100; font-size:20px; font-family: 'Quicksand', sans-serif; margin:5px auto;   ">Fast Sell/Low Profit</div>
+    <div class="col-sm-2" style="background:#008000; width: 140px; height:140px; padding:35px 18px 18px 18px; text-align:center; color:white; border-radius:70px; border:2px solid black; font-size:20px; font-family: 'Quicksand', sans-serif; margin:5px;  display:inline-block;">Ideal Sell Time/Profit</div>
+    <div class="col-sm-2" style="background:#FFA500; width: 140px; height:140px; padding:24px 13px 13px 13px; text-align:center; color:white; border-radius:70px; border:2px solid black; font-size:20px; font-family: 'Quicksand', sans-serif; margin:5px; display:inline-block;">Slow Sale/Higher Profit</div>
+    <div class="col-sm-2" style="background:#FF2B00; width: 140px; height:140px; padding:24px 13px 13px 13px; margin:5px; text-align:center; color:white; border-radius:70px; border:2px solid black; font-size:20px; font-family: 'Quicksand', sans-serif; display:inline-block;"><br>Outlier</div>
   </div>
-  <!-- Median Price:<br> -->
-  <!-- <%#= @item_query.median(:price) %><br>
-  <br> -->
-
-    <!-- <span style="font-size:40px; background:gray; padding:10px;">Min</span>
-    <span style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.minimum(:price) %></span>
   </div>
-  <div class="col-md-3">
-  <span style="font-size:40px; background:gray; padding:10px">Max</span>
-  <span style="background:black; color:white; font-size:40px; padding:10px;">$<%= @item_query.maximum(:price) %></span>
-  </div> -->
+  <%count = 0%>
+  <% @item_query.all.order(price: :desc).each do |i| %>
+    <% i.price %>
+    <% count += 1%>
+  <%end %>
+<%middle = count / 2%>
+<%middle%>
+<br><br>
+  <div class="col-sm-6 text-center" style="">
+    <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">Median</div>
+    <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;">
+      <%= number_to_currency(@item_query.all.order(price: :asc)[middle].price, precision: 0) rescue nil %>
+    </div>
+  </div>
+  <div class="col-sm-3 text-center" style="">
+    <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">25%</div>
+    <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;"><%= number_to_currency(@item_query.all.order(price: :asc)[12].price, precision: 0) rescue nil %>
+          <%#= (middle - (middle / 2)) %></div>
+  </div>
+  <div class="col-sm-3 text-center" style="">
+    <div class="col-sm-6 text-center" style="font-size:40px; background:gray; padding:10px;">75%</div>
+    <div class="col-sm-6 text-center" style="background:black; color:white; font-size:40px; padding:10px;"><%= number_to_currency(@item_query.all.order(price: :asc)[(middle + (middle / 2))].price, precision: 0) rescue nil %></div>
+  </div>
+<br><br>
 </div>
 <br><br>
-<h2>Between $10 - $40</h2><br>
+<h2><%#=@item_query.all.class%></h2>
+<h2>Lower 25th Percentile</h2><br>
 <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
   <% if i.price > 10 && i.price < 41 %>
-    <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+    <!-- <span style="font-size:20px; padding:5px;"><%#= i.price %></span> -->
     <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
   <% end %>
 <% end %><br><br>
-<h2>Between $41 - $70</h2><br>
+<h2>Middle</h2><br>
 <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
   <% if i.price > 40 && i.price < 71 %>
-    <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+
     <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
   <% end %>
 <% end %><br><br>
-<h2>Between $71 - $100</h2><br>
+<h2>Higher 25th Percentile</h2><br>
 <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
   <% if i.price > 70 && i.price < 101 %>
-    <span style="font-size:20px; padding:5px;"><%= i.price %></span>
+
     <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
   <% end %>
 <% end %><br><br>
 <h2>Over $100</h2><br>
 <% @item_query.all.sort_by{|e| e[:price]}.map do |i| %>
   <% if i.price > 100 %>
-    <span style="font-size:20px; padding:5px;"><%= i.price %><span>
+    <span style="font-size:20px; padding:5px;"><%#= i.price %><span>
     <span  style=""><img src="<%= i.image %>" id="" class="imgbetween tileimage" style=""></span>
   <% end %>
 <% end %>
 </div>
 </div>
 <style>
+* {
+  font-family: 'Quicksand';
+}
+/* Required */
+img.colorify:not(.visible) {
+  opacity: 0;
+  filter: blur(3px);
+}
+
+img.colorify:not(.all-loaded).all-not-loaded {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: pixelated;
+}
 body {
 background: #99FFFF;
 }
@@ -229,5 +258,52 @@ position: relative;
 
 .tooltip1:hover .tooltiptext {
     visibility: visible;
+}
+.center1 {
+    margin: 0 auto;
+    width: 80%;
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 320px;
+	height: 480px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
 }
 </style>

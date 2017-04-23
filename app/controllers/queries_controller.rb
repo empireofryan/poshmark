@@ -10,7 +10,7 @@ class QueriesController < ApplicationController
   def create
     new_query = params.require(:query).permit(:id, :search)
     query = Query.create!(new_query)
-    @query = params[:query][:search].gsub(" ", "%20")
+    @query = params[:query][:search].gsub(" ", "+")
     @query_id = params[:query][:id]
   #  @search = @query.search
     # %x[rake hydra:run search="#{@search}"]
@@ -41,7 +41,8 @@ class QueriesController < ApplicationController
           puts 'after c before z'
           p z
           puts z.class
-           (0..47).to_a.each do |foo|
+        #   (0..47).to_a.each do |foo|
+            z.to_a.each do |foo|
 
             puts foo
           #  byebug

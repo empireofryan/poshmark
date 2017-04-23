@@ -16,4 +16,13 @@ class Query < ApplicationRecord
     num / (min + max)
   end
 
+  def median(array)
+    array.all.sort_by{|e| e[:price]}.map do |i|
+       sorted = i.spectrum(i.price)
+    end
+#    sorted = array.sort
+    len = sorted.length
+    (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
+  end
+
 end
